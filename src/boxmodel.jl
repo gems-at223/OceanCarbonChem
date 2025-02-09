@@ -35,7 +35,7 @@ end
 function run_simulation(model)
     simulation = Simulation(model; 
         Δt = 0.0000007seconds, 
-        stop_time = 0.04seconds
+        stop_time = 0.1seconds
     )
     
     simulation.output_writers[:fields] = JLD2OutputWriter(

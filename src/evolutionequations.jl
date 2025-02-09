@@ -25,7 +25,7 @@ required_biogeochemical_tracers(::DynamicCarbonateChemistry) = (:c₁, :c₂, :c
 
 @inline function (bgc::DynamicCarbonateChemistry)(::Val{:c₁}, x, y, z, t, c₁, c₂, c₃,c₄,c₅,c₆,c₇)
    co2_evolution=(bgc.β₁*c₄+bgc.β₄)*c₂ - (bgc.α₁+bgc.α₄*c₅)*c₁
-  # println(co2_evolution)
+   println(co2_evolution)
 
    return co2_evolution
 end
@@ -45,7 +45,7 @@ end
 
 @inline function (bgc::DynamicCarbonateChemistry)(::Val{:c₄}, x, y, z, t, c₁, c₂, c₃,c₄,c₅,c₆,c₇)
    H_evolution=(bgc.β₅-bgc.β₁*c₄)*c₂ - (bgc.α₅*c₄*c₃) + (bgc.α₁*c₁) - (bgc.α₁*c₄*c₃) + (bgc.α₆) - (bgc.β₆*c₄*c₅) + (bgc.α₇*c₆) - (bgc.β₇*c₇*c₄)
-   println(H_evolution)
+   #println(H_evolution)
    return H_evolution
 end
 
