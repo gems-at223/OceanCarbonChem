@@ -69,7 +69,7 @@ BOH4ᵢ(z) = exp(-((z + 6)^2) / 2)
 #bᵢ(z) = cos(π * z)
 set!(model, CO2=CO2ᵢ, HCO3=HCO3ᵢ,Carbonate=Carbonateᵢ,H=Hᵢ,OH=OHᵢ,BOH3=BOH3ᵢ,BOH4=BOH4ᵢ)
 
-simulation = Simulation(model; Δt=1e-4, stop_iteration=100)
+simulation = Simulation(model; Δt=1e-9, stop_iteration=100)
 progress(sim) = @info @sprintf("Iter: %d, time: %.2e", iteration(sim), time(sim))
 simulation.callbacks[:progress] = Callback(progress, IterationInterval(10))
 

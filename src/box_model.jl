@@ -6,19 +6,6 @@ import Oceananigans.Biogeochemistry: required_biogeochemical_tracers,
                                      required_biogeochemical_auxiliary_fields,
                                      biogeochemical_drift_velocity
 
-#@kwdef struct DynamicCarbonateChemistry{FT} <: AbstractContinuousFormBiogeochemistry
-    #α₁ :: FT = 0.0037        ## s-1
-    #β₁ :: FT = 2.66*10^4      # kg mol-1 s-1
-    #α₄ :: FT = 4.05e3       # kg mol-1 s-1
-    #β₄ :: FT = 1.76*10^-4     # s-1
-    #α₅ :: FT = 10^10.0       # kg mol-1 s-1
-    #β₅ :: FT = 9.0           # s-1
-    #α₆ :: FT = 1.3*10^-3     # kg mol-1 s-1
-    #β₆ :: FT = 2.8*10^10.0   # kg mol-1 s-1
-    #α₇ :: FT = 20.0          # s-1
-    #β₇ :: FT = 10^10.0       # kg mol-1 s-1
-#end
-
 @kwdef struct DynamicCarbonateChemistry{FT} <: AbstractContinuousFormBiogeochemistry
     α₁ :: FT = 0.0036        # s-1
     β₁ :: FT = 3.3*10^4      # kg mol-1 s-1
@@ -112,7 +99,7 @@ set!(model,
    # c₇ = 1.19e-4    # B(OH)₄⁻ (scaled up from 1.25e-4)
 #)
 
-simulation = Simulation(model; Δt = 0.0000001seconds, stop_time = 0.01seconds)
+simulation = Simulation(model; Δt = 0.0000007seconds, stop_time = 0.1seconds)
 
 simulation.output_writers[:fields] = JLD2OutputWriter(model, model.fields; filename = "box_np.jld2", schedule = TimeInterval(0.00001seconds), overwrite_existing = true)
 
@@ -148,49 +135,49 @@ fig = Figure(size = (1200, 1200), fontsize = 20)
 #lines!(axP, times / year, N[1, 1, 1, :], linewidth = 3)
 axN = Axis(fig[1, 1], 
     ylabel = "CO2 \n(mmol/m³)",
-    xlabel = "Time (days)")
+    xlabel = "Time (seconds)")
    # limits = (0, 1e-8)
 ylims!(axN, 0, 0.1)
 lines!(axN, times, c1[1, 1, 1, :], linewidth = 3)
 
 axP = Axis(fig[1, 2], 
     ylabel = "HCO3 \n(mmol/m³)",
-    xlabel = "Time (days)")
+    xlabel = "Time (seconds)")
    # limits = (0, 1e-8)
 ylims!(axP, 0, 0.01)
 lines!(axP, times, c2[1, 1, 1, :], linewidth = 3)
 
 axZ = Axis(fig[2, 1], 
     ylabel = "CO₃²⁻ \n(mmol/m³)",
-    xlabel = "Time (days)")
+    xlabel = "Time (seconds)")
    # limits = (0, 1e-8)
 ylims!(axZ, 0, 0.0005)
 lines!(axZ, times, c3[1, 1, 1, :], linewidth = 3)
 
 axD = Axis(fig[2, 2], 
     ylabel = "H⁺ \n(mmol/m³)",
-    xlabel = "Time (days)")
+    xlabel = "Time (seconds)")
    # limits = (0, 1e-8)
 ylims!(axD, 0, 1e-8)
 lines!(axD, times, c4[1, 1, 1, :], linewidth = 3)
 
 axD = Axis(fig[3, 1], 
     ylabel = "OH⁻ \n(mmol/m³)",
-    xlabel = "Time (days)")
+    xlabel = "Time (seconds)")
    # limits = (0, 1e-8)
 ylims!(axD, 0, 0.0001)
 lines!(axD, times, c5[1, 1, 1, :], linewidth = 3)
 
 axe = Axis(fig[3, 2], 
     ylabel = "B(OH)₃ \n(mmol/m³)",
-    xlabel = "Time (days)")
+    xlabel = "Time (seconds)")
    # limits = (0, 1e-8)
 ylims!(axe, 0, 0.00001)
 lines!(axe, times, c6[1, 1, 1, :], linewidth = 3)
 
 axf = Axis(fig[4, 1], 
     ylabel = "B(OH)₄⁻ \n(mmol/m³)",
-    xlabel = "Time (days)")
+    xlabel = "Time (seconds)")
    # limits = (0, 1e-8)
 ylims!(axf, 0, 0.00001)
 lines!(axf, times, c7[1, 1, 1, :], linewidth = 3)
