@@ -43,12 +43,6 @@ end
    return CO3_evolution
 end
 
-@inline function (bgc::DynamicCarbonateChemistry)(::Val{:c₄}, x, y, z, t, c₁, c₂, c₃,c₄,c₅,c₆,c₇)
-   H_evolution=(bgc.β₅-(bgc.β₁*c₄))*c₂  + (bgc.α₁*c₁)- (bgc.α₅*c₄*c₃) + (bgc.α₆) - (bgc.β₆*c₄*c₅) + (bgc.α₇*c₆) - (bgc.β₇*c₇*c₄)
-   #println(H_evolution)
-   return H_evolution
-end
-
 @inline function (bgc::DynamicCarbonateChemistry)(::Val{:c₅}, x, y, z, t, c₁, c₂, c₃,c₄,c₅,c₆,c₇)
    OH_evolution=(bgc.β₄*c₂) - (bgc.α₄*c₁*c₅) + bgc.α₆ - bgc.β₆*c₄*c₅
    return OH_evolution
