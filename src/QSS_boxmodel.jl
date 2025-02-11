@@ -35,7 +35,7 @@ function setup_model()
     c₁ = 7.57*10^-6,    # CO₂ (scaled up from 1.5e-5)
     c₂ = 1.67*10^-2,    # HCO₃⁻ (scaled up from 1.9e-3)
     c₃ = 3.15*10^-4,    # CO₃²⁻ (scaled up from 2.5e-4)
-   # c₄ = 6.31*10^-9,   # H⁺ (scaled up from 3.16e-8)
+    #c₄ = 6.31*10^-9,   # H⁺ (scaled up from 3.16e-8)
     c₅ = 9.60*10^-6,   # OH⁻ (scaled up from 3.16e-7)
     c₆ = 2.97e-4,   # B(OH)₃ (scaled up from 3.75e-4)
     c₇ = 1.19e-4    # B(OH)₄⁻ (scaled up from 1.25e-4)
@@ -48,14 +48,14 @@ end
 function run_simulation(model)
     simulation = Simulation(model; 
         Δt = 0.0000009seconds, 
-        stop_time = 0.02seconds
+        stop_time = 1seconds
     )
     
     simulation.output_writers[:fields] = JLD2OutputWriter(
         model, 
         model.fields;
         filename = "box_np.jld2",
-        schedule = TimeInterval(0.00009seconds),
+        schedule = TimeInterval(0.0001seconds),
         overwrite_existing = true
     )
     

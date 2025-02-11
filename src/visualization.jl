@@ -8,7 +8,7 @@ function plot_results(c1, c2, c3, c4, c5, c6, c7, times)
     ax1 = Axis(fig[1, 1], 
         ylabel = "CO2 \n(mol/kg)",
         xlabel = "Time (seconds)")
-    ylims!(ax1, 0, 1e-5)
+    ylims!(ax1, 0, 1e-4)
     lines!(ax1, times, c1[1, 1, 1, :], linewidth = 3)
     
     # HCO3 plot

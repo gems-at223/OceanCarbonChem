@@ -46,15 +46,15 @@ end
 
 function run_simulation(model)
     simulation = Simulation(model; 
-        Δt = 0.0000006seconds, 
-        stop_time = 0.02seconds
+        Δt = 0.0000005seconds, 
+        stop_time = 1seconds
     )
     
     simulation.output_writers[:fields] = JLD2OutputWriter(
         model, 
         model.fields;
         filename = "box_np.jld2",
-        schedule = TimeInterval(0.00009seconds),
+        schedule = TimeInterval(0.0001seconds),
         overwrite_existing = true
     )
     
@@ -77,7 +77,7 @@ function main()
     
     # Plot results
     fig = plot_results(c1, c2, c3, c4, c5, c6, c7, c1.times)
-    save("perturbed_model_results.png",fig)
+    save("perturbed_full_model_results.png",fig)
     display(fig)
 end
 
