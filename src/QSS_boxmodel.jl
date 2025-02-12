@@ -21,16 +21,6 @@ function setup_model()
         clock
     )
     
-    # Initial conditions
-    #set!(model, 
-        #c₁ = 1.5e-1,    # CO₂
-        #c₂ = 1.9e-3,    # HCO₃⁻
-        #c₃ = 2.5e-4,    # CO₃²⁻
-        #c₄ = 3.16e-5,   # H⁺
-        #c₅ = 3.16e-5,   # OH⁻
-        #c₆ = 3.75e-8,   # B(OH)₃
-        #c₇ = 1.25e-6    # B(OH)₄⁻
-#)
     set!(model, 
     c₁ = 7.57*10^-6,    # CO₂ (scaled up from 1.5e-5)
     c₂ = 1.67*10^-2,    # HCO₃⁻ (scaled up from 1.9e-3)
