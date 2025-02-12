@@ -19,17 +19,6 @@ function setup_model()
         prescribed_tracers = (; T = temp),
         clock
     )
-    
-    # Initial conditions
-    #set!(model, 
-        #c₁ = 1.5e-1,    # CO₂
-        #c₂ = 1.9e-3,    # HCO₃⁻
-        #c₃ = 2.5e-4,    # CO₃²⁻
-        #c₄ = 3.16e-5,   # H⁺
-        #c₅ = 3.16e-5,   # OH⁻
-        #c₆ = 3.75e-8,   # B(OH)₃
-        #c₇ = 1.25e-6    # B(OH)₄⁻
-#)
     set!(model, 
     c₁ = 7.57*10^-6,    # CO₂ (scaled up from 1.5e-5)
     c₂ = 1.67*10^-2,    # HCO₃⁻ (scaled up from 1.9e-3)
@@ -39,8 +28,6 @@ function setup_model()
     c₆ = 2.97e-4,   # B(OH)₃ (scaled up from 3.75e-4)
     c₇ = 1.19e-4    # B(OH)₄⁻ (scaled up from 1.25e-4)
     )
-
-    
     return model
 end
 
@@ -54,7 +41,7 @@ function run_simulation(model)
         model, 
         model.fields;
         filename = "box_np.jld2",
-        schedule = TimeInterval(0.0001seconds),
+        schedule = TimeInterval(0.0005seconds),
         overwrite_existing = true
     )
     
@@ -77,7 +64,7 @@ function main()
     
     # Plot results
     fig = plot_results(c1, c2, c3, c4, c5, c6, c7, c1.times)
-    save("perturbed_full_model_results.png",fig)
+    save("perturbed_full_model_results2.png",fig)
     display(fig)
 end
 

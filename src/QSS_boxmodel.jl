@@ -47,7 +47,7 @@ end
 
 function run_simulation(model)
     simulation = Simulation(model; 
-        Δt = 0.0000009seconds, 
+        Δt = 0.001seconds, 
         stop_time = 1seconds
     )
     
@@ -55,7 +55,7 @@ function run_simulation(model)
         model, 
         model.fields;
         filename = "box_np.jld2",
-        schedule = TimeInterval(0.0001seconds),
+        schedule = TimeInterval(0.0005seconds),
         overwrite_existing = true
     )
     
@@ -78,7 +78,7 @@ function main()
     
     # Plot results
     fig = plot_results(c1, c2, c3, c3, c5, c6, c7, c1.times)
-    save("perturbed_model_results.png",fig)
+    save("perturbed_model_results2.png",fig)
     display(fig)
 end
 
