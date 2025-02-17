@@ -30,7 +30,7 @@ set!(model,
     )
 # run
 
-simulation = Simulation(model, Δt = 0.0001seconds, stop_time = 0.5seconds)
+simulation = Simulation(model, Δt = 0.0001seconds, stop_time = 1seconds)
 
 simulation.output_writers[:tracers] = JLD2OutputWriter(model, model.tracers,
                                                        filename = "column_np.jld2",
@@ -61,8 +61,10 @@ hmP = heatmap!(axP, times, zc, P[1, 1, 1:grid.Nz, 1:end]',
 
 #lines!(axSed, times ./ year, sed[1, 1, 1, :])
 
-Colorbar(fig[1, 2], hmN, label = "Nutrient (mmol N / m³)")
-Colorbar(fig[2, 2], hmP, label = "Phytoplankton (mmol N / m³)")
+Colorbar(fig[1, 2], hmN, label = "CO₂ (mol/ kg)")
+Colorbar(fig[2, 2], hmP, label = "CO₃ (mol / kg)")
+
+save("1D_model.png",fig)
 
 display(fig)
 
