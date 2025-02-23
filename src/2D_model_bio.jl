@@ -5,7 +5,7 @@ using Oceananigans.Units
 using Oceananigans.ImmersedBoundaries: ImmersedBoundaryGrid, GridFittedBoundary
 using Oceananigans.BoundaryConditions
 
-grid = RectilinearGrid(CPU(), size = (24,24),x = (-0.025meters, 0.025meters), z=(-0.025meters, 0.025meters), topology = (Bounded, Flat, Bounded))
+grid = RectilinearGrid(CPU(), size = (20,20),x = (-0.025meters, 0.025meters), z=(-0.025meters, 0.025meters), topology = (Bounded, Flat, Bounded))
 biogeochemistry = DynamicCarbonateChemistry()
 
 horizontal_closure = HorizontalScalarDiffusivity(ν=1e-3, κ=2e-9)
@@ -56,7 +56,7 @@ c7ᵢ(x, z) =  1.19e-4
 
 set!(model, c₁=c1ᵢ, c₂=c2i, c₃=c3ᵢ, c₅=c5ᵢ, c₆=c6ᵢ, c₇=c7ᵢ)
 
-simulation = Simulation(model; Δt = 0.0005seconds, stop_time = 1seconds)
+simulation = Simulation(model; Δt = 0.0006seconds, stop_time = 1seconds)
 
 simulation.output_writers[:tracers] = JLD2OutputWriter(model, model.tracers,
                                                        filename = "buoyancy_front.jld2",
@@ -105,7 +105,7 @@ Colorbar(fig[3, 2], hm3, ticks = [ 0.00016389497310348997 , 0.000305165125234281
 
 rowgap!(fig.layout, 0)
 
-record(fig, "buoyancy_front.gif", 1:length(times)) do i
+record(fig, "images/2D_results/organism_results.gif", 1:length(times)) do i
     n[] = i
 end
 P_min = minimum(interior(P[1], :, 1, :))
