@@ -120,7 +120,7 @@ axOH = Axis(fig[5, 1], ylabel = "z (m)")
 #axSed = Axis(fig[3, 1:2], ylabel = "Sediment (mmol N / m²)", xlabel = "Time (years)")
 
 _, _, zc = nodes(grid, Center(), Center(), Center())
-times = N.times
+times = CO2.times
 
 hmCO2 = heatmap!(axCO2, times , zc, CO2[1, 1, 1:grid.Nz, 1:end]',
                interpolate = true, colormap = Reverse(:batlow))
@@ -146,13 +146,14 @@ hmOH = heatmap!(axOH, times, zc, OH[1, 1, 1:grid.Nz, 1:end]',interpolate = true,
 
 Colorbar(fig[1, 2], hmCO2, label = "CO₂ (mol/ kg)")
 Colorbar(fig[2, 2], hmHCO3, label = "HCO₃ (mol / kg)")
-Colorbar(fig[3, 2], hmCO3, label = "HCO3- (mol / kg)")
+Colorbar(fig[3, 2], hmCO3, label = "CO3- (mol / kg)")
 Colorbar(fig[4, 2], hmH, label = "H⁺ (mol / kg)")
+Colorbar(fig[5, 2], hmOH, label = "OH⁻ (mol / kg)")
 #Colorbar(fig[5, 2], hmB, label = "B(OH)₃ (mol / kg)")
 #Colorbar(fig[6, 2], hmBOH, label = "B(OH)₄⁻ (mol / kg)")
 
 
-save("images/1D_results/1D_model.png",fig)
+save("1D_model.png",fig)
 
 display(fig)
 
@@ -181,14 +182,14 @@ OH_profile = OH_data_final[1, 1, 1:16]
 
 
 
-lines!(ax_line, zc,CO2_profile, label = "CO2 at final time step")
-lines!(HCO3_line, zc,HCO3_profile, label = "HCO3 at final time step")
-lines!(CO3_line, zc,CO3_profile, label = "CO3 at final time step")
-lines!(H_line, zc,H_profile, label = "H at final time step")
-lines!(OH_line, zc,OH_profile, label = "OH at final time step")
+lines!(ax_line, zc*-1,CO2_profile, label = "CO2 at final time step")
+lines!(HCO3_line, zc*-1,HCO3_profile, label = "HCO3 at final time step")
+lines!(CO3_line, zc*-1,CO3_profile, label = "CO3 at final time step")
+lines!(H_line, zc*-1,H_profile, label = "H at final time step")
+lines!(OH_line, zc*-1,OH_profile, label = "OH at final time step")
 
 
-save("images/1D_results/line_plot.png", fig_line)
+save("line_plot.png", fig_line)
 
 display(fig_line)
 
