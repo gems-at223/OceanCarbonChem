@@ -5,14 +5,14 @@ using Oceananigans.Units
 using Oceananigans.ImmersedBoundaries: ImmersedBoundaryGrid, GridFittedBoundary
 using Oceananigans.BoundaryConditions
 
-grid = RectilinearGrid(CPU(), size = (16,16),x = (-0.001meters, 0.001meters), z=(-0.001meters, 0.001meters), topology = (Bounded, Flat, Bounded))
+grid = RectilinearGrid(CPU(), size = (18,18),x = (-0.001meters, 0.001meters), z=(-0.001meters, 0.001meters), topology = (Bounded, Flat, Bounded))
 biogeochemistry = DynamicCarbonateChemistry()
 
 horizontal_closure = HorizontalScalarDiffusivity(ν=1e-3, κ=2e-9)
 vertical_closure = VerticalScalarDiffusivity(ν=1e-3, κ=2e-9)
 
-CO₂_flux = 1e-9  # Example flux value
-R=0.0002
+CO₂_flux = 1e-7  # Example flux value
+R=0.00015
 
 
 
@@ -27,7 +27,7 @@ end
 @inline function CO2_forcing(x,z,t,c₁)
     if !inside_cylinder(x, z)  
         dist = distance_from_center(x, z)
-        return - ((3.53*10^-12/(0.0008*4*π*dist^2))*(c₁/((5*10^-6)+c₁)))
+        return - ((3.53*10^-13/(0.0008*4*π*dist^2))*(c₁/((5*10^-5)+c₁)))
     else
         return 0.0  
     end
@@ -36,7 +36,7 @@ end
 @inline function HCO3_forcing(x,z,t,c₁)
     if !inside_cylinder(x, z)  
         dist = distance_from_center(x, z)
-        return - ((3.53*10^-12/(0.0008*4*π*dist^2))*(1-(c₁/((5*10^-6)+c₁))))
+        return - ((3.53*10^-13/(0.0008*4*π*dist^2))*(1-(c₁/((5*10^-5)+c₁))))
     else
         return 0.0  
     end
@@ -45,7 +45,7 @@ end
 @inline function OH_forcing(x,z,t,c₁)
     if !inside_cylinder(x, z) 
         dist = distance_from_center(x, z)
-        return  ((3.53*10^-12/(0.0008*4*π*dist^2))*(1-(c₁/((5*10^-6)+c₁))))
+        return  ((3.53*10^-13/(0.0008*4*π*dist^2))*(1-(c₁/((5*10^-5)+c₁))))
     else
         return 0.0  
     end
@@ -73,7 +73,7 @@ boundary_conditions = (c₃ = FieldBoundaryConditions(top = GradientBoundaryCond
 model = NonhydrostaticModel(; grid=immersed_grid, biogeochemistry,
                              #advection=WENO(;grid),
                               tracers = ( :c₁, :c₂, :c₃, :c₅, :c₆, :c₇),
-                              boundary_conditions = boundary_conditions,
+                             # boundary_conditions = boundary_conditions,
                               #closure = (horizontal_closure, vertical_closure),
                               closure = ScalarDiffusivity(ν=1e-3, κ=2e-9),
                               forcing = (;c₁=(forcing),c₂=(forcinghco3),c₅=(OHforcing)))
@@ -84,7 +84,7 @@ model = NonhydrostaticModel(; grid=immersed_grid, biogeochemistry,
 #Tᵢ(x, z) = front(x, z, 9, 0.05)
 
 c1ᵢ(x, z) = 7.57*10^-6  #front(x, z, 7.57*10^-6, 3.57*10^-6) #
-c2i(x, z) =10*1.67*10^-3 #front(x,z,1.67*10^-4, (1.67*10^-3))   
+c2i(x, z) =5*1.67*10^-3 #front(x,z,1.67*10^-4, (1.67*10^-3))   
 c3ᵢ(x, z) = 3.15*10^-4 #front(x,z,3.15*10^-4, (3.15*10^-4)/2)    
 #C4ᵢ(x, z) = 6.31*10^-9
 c5ᵢ(x, z) =  9.60*10^-6
@@ -94,7 +94,7 @@ c7ᵢ(x, z) =  1.19e-4
 
 set!(model, c₁=c1ᵢ, c₂=c2i, c₃=c3ᵢ, c₅=c5ᵢ, c₆=c6ᵢ, c₇=c7ᵢ)
 
-simulation = Simulation(model; Δt = 0.001seconds, stop_time = 1seconds)
+simulation = Simulation(model; Δt = 0.001seconds, stop_time = 3seconds)
 
 simulation.output_writers[:tracers] = JLD2OutputWriter(model, model.tracers,
                                                        filename = "buoyancy_front.jld2",
@@ -149,7 +149,7 @@ Colorbar(fig[4, 2], hm4, ticks = [ 0.0 ,  9.6e-6])
 
 rowgap!(fig.layout, 0)
 
-record(fig, "images/2D_results/organism_results.gif", 1:length(times)) do i
+record(fig, "images/2D_results/organism_results_flux.gif", 1:length(times)) do i
     n[] = i
 end
 CO2_min = minimum(interior(CO2[1], :, 1, :))
