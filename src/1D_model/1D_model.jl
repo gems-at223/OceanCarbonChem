@@ -80,7 +80,7 @@ model = NonhydrostaticModel(; grid,
 
 set!(model, 
     c₁ = 7.57*10^-6,    # CO₂ (scaled up from 1.5e-5)
-    c₂ = 1.67*10^-4,    # HCO₃⁻ (scaled up from 1.9e-3)
+    c₂ = 1.67*10^-3,    # HCO₃⁻ (scaled up from 1.9e-3)
     c₃ = 3.15*10^-4,    # CO₃²⁻ (scaled up from 2.5e-4)
     c₄ = 6.31*10^-9,   # H⁺ (scaled up from 3.16e-8)
     c₅ = 9.60*10^-6,   # OH⁻ (scaled up from 3.16e-7)
