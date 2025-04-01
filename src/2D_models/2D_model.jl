@@ -22,7 +22,7 @@ forcing=AdvectiveForcing(w=-0.0000001)
 model = NonhydrostaticModel(; grid, biogeochemistry,
                              #advection=WENO(;grid),
                               tracers = ( :c₁, :c₂, :c₃, :c₅, :c₆, :c₇),  
-                              boundary_conditions = boundary_conditions,
+                              #boundary_conditions = boundary_conditions,
                               #closure = (horizontal_closure, vertical_closure))
                               closure = ScalarDiffusivity(κ=1e-9))
                               #forcing=(;c₃=(forcing),c₁ = (forcing))

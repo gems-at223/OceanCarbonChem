@@ -84,7 +84,7 @@ model = NonhydrostaticModel(; grid=immersed_grid, biogeochemistry,
 #Tᵢ(x, z) = front(x, z, 9, 0.05)
 
 c1ᵢ(x, z) = 7.57*10^-6  #front(x, z, 7.57*10^-6, 3.57*10^-6) #
-c2i(x, z) =5*1.67*10^-3 #front(x,z,1.67*10^-4, (1.67*10^-3))   
+c2i(x, z) =3*1.67*10^-3 #front(x,z,1.67*10^-4, (1.67*10^-3))   
 c3ᵢ(x, z) = 3.15*10^-4 #front(x,z,3.15*10^-4, (3.15*10^-4)/2)    
 #C4ᵢ(x, z) = 6.31*10^-9
 c5ᵢ(x, z) =  9.60*10^-6

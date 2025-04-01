@@ -1,6 +1,6 @@
 #include("evolutionequations.jl")
-include("visualization.jl")
-include("QSS.jl")
+include("../visualization_scripts/visualization.jl")
+include("../DynamicCarbonateChemistry/QSS.jl")
 
 using OceanBioME, Oceananigans
 using Oceananigans.Units
@@ -10,22 +10,22 @@ using CairoMakie
 
 
 function setup_model()
-    biogeochemistry = Biogeochemistry(DynamicCarbonateChemistry())
+    biogeochemistry = Biogeochemistry(DynamicCarbonateChemistry2())
     clock = Clock(; time = 0.0)
     @inline temp(t) = 2.4 * cos(t * 2π / year + 50days) + 26
 
     
     model = BoxModel(; 
         biogeochemistry,
-        prescribed_tracers = (; T = temp),
+      #  prescribed_tracers = (; T = temp),
         clock
     )
     
     set!(model, 
-    c₁ = 7.57*10^-6,    # CO₂ (scaled up from 1.5e-5)
-    c₂ = 1.67*10^-2,    # HCO₃⁻ (scaled up from 1.9e-3)
+    c₁ =  1.02304037221092e-5,    # CO₂ (scaled up from 1.5e-5)
+    c₂ = 1.67*10^-3,    # HCO₃⁻ (scaled up from 1.9e-3)
     c₃ = 3.15*10^-4,    # CO₃²⁻ (scaled up from 2.5e-4)
-    #c₄ = 6.31*10^-9,   # H⁺ (scaled up from 3.16e-8)
+    c₄ = 6.31*10^-9,   # H⁺ (scaled up from 3.16e-8)
     c₅ = 9.60*10^-6,   # OH⁻ (scaled up from 3.16e-7)
     c₆ = 2.97e-4,   # B(OH)₃ (scaled up from 3.75e-4)
     c₇ = 1.19e-4    # B(OH)₄⁻ (scaled up from 1.25e-4)
@@ -38,14 +38,14 @@ end
 function run_simulation(model)
     simulation = Simulation(model; 
         Δt = 0.001seconds, 
-        stop_time = 1seconds
+        stop_time = 240seconds
     )
     
     simulation.output_writers[:fields] = JLD2OutputWriter(
         model, 
         model.fields;
         filename = "box_np.jld2",
-        schedule = TimeInterval(0.0005seconds),
+        schedule = TimeInterval(0.5seconds),
         overwrite_existing = true
     )
     
@@ -68,8 +68,12 @@ function main()
     
     # Plot results
     fig = plot_results(c1, c2, c3, c3, c5, c6, c7, c1.times)
-    save("perturbed_model_results2.png",fig)
+    save("perturbed_model_results_new_eq.png",fig)
     display(fig)
+    min=minimum(c1[1, 1, 1, :])
+    max=maximum(c1[1, 1, 1, :])
+    println("Minimum CO2 concentration: ", min)
+    println("Maximum CO2 concentration: ", max)
 end
 
 main()

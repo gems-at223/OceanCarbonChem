@@ -1,5 +1,5 @@
-include("evolutionequations.jl")
-include("visualization.jl")
+include("../DynamicCarbonateChemistry/evolutionequations.jl")
+include("../visualization_scripts/visualization.jl")
 
 using OceanBioME, Oceananigans
 using Oceananigans.Units
@@ -21,7 +21,7 @@ function setup_model()
     )
     set!(model, 
     c₁ = 7.57*10^-6,    # CO₂ (scaled up from 1.5e-5)
-    c₂ = 1.67*10^-2,    # HCO₃⁻ (scaled up from 1.9e-3)
+    c₂ = 1.67*10^-3,    # HCO₃⁻ (scaled up from 1.9e-3)
     c₃ = 3.15*10^-4,    # CO₃²⁻ (scaled up from 2.5e-4)
     c₄ = 6.31*10^-9,   # H⁺ (scaled up from 3.16e-8)
     c₅ = 9.60*10^-6,   # OH⁻ (scaled up from 3.16e-7)
@@ -41,7 +41,7 @@ function run_simulation(model)
         model, 
         model.fields;
         filename = "box_np.jld2",
-        schedule = TimeInterval(0.0005seconds),
+        schedule = TimeInterval(0.005seconds),
         overwrite_existing = true
     )
     
