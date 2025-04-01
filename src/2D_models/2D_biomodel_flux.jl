@@ -1,4 +1,6 @@
-include("DynamicCarbonateChemistry/QSS.jl")
+include("../DynamicCarbonateChemistry/QSS.jl")
+include("../utils/param_init.jl")
+
 using OceanBioME, Oceananigans
 using Oceananigans.Units
 using Oceananigans.ImmersedBoundaries: ImmersedBoundaryGrid, GridFittedBoundary
@@ -10,11 +12,14 @@ x = (-0.002meters, 0.002meters),y=1, z=(-0.002meters, 0.002meters), topology = (
 println(grid)
 biogeochemistry = DynamicCarbonateChemistry2()
 
-horizontal_closure = HorizontalScalarDiffusivity(ν=1e-3, κ=2e-9)
-vertical_closure = VerticalScalarDiffusivity(ν=1e-3, κ=2e-9)
-rising = AdvectiveForcing(u=+0.00001,v=0,w=0.00001)
+params=calculate_params(8.1, 420)
+c₁=params[1]
+c₂=params[2]
+c₃=params[3]
+c₅=params[4]
+c₆=params[5]
+c₇=params[6]
 
-CO₂_flux = 1e-7  # Example flux value
 R=0.0002
 
 
@@ -106,7 +111,6 @@ end
 @inline function HCO3_forcing(x,z,t,c₁)
     dist = distance_from_center(x, z)
     if !inside_cylinder(x, z)  &&  (abs(dist - R) <= distance)
-       # area=compute_area_around_boundary(x,z,R,0.0005)
         return - (((12.7e-9/3600)/(area))*(1-(c₁/((5*10^-6)+c₁))))
     else
         return 0.0  
@@ -116,7 +120,6 @@ end
 @inline function OH_forcing(x,z,t,c₁)
     dist = distance_from_center(x, z)
     if !inside_cylinder(x, z) && (abs(dist - R) <= distance)
-        #area=compute_area_around_boundary(x,z,R,0.0005)
         return  (((12.7e-9/3600)/(area))*(1-(c₁/((5*10^-6)+c₁))))
     else
         return 0.0  
