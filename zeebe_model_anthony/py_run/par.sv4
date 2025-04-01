@@ -1,0 +1,52 @@
+==================================== 
+=========== par.solvde4 ============ 
+==================================== 
+--- solvde4.c  --- 
+--- diffusion and reaction  --- 
+EQCO2   1 
+EQHCO3  2 
+EQCO3   3 
+EQHP    4 
+EQOH    5 
+EQBOH3  6 
+EQBOH4  7 
+EQO2    8 
+EQCA    9 
+(N2) number of equations of 2. order 9 
+(NE) number of equations of 1. order 18 
+(NLB) number of left b.c.            9 
+(NRB) number of right b.c.           9 
+dimensions of y-array  18  1000 
+dimensions of s-array  18  37 
+dimensions of c-array  18  10  1001 
+h [mu] grid spacing       2.252252e+00 
+------------------------- 
+2.500000e+02   r[1]                 
+2.500000e+03   r[M]                 
+------------------------- 
+---   dc/dr at the surface (solution)   --- 
+co2flux  [mol/kg/mu]       2.113420e-04 
+hflux    [mol/kg/mu]       5.784743e-08 
+hco3flux [mol/kg/mu]       1.280271e-02 
+co3flux  [mol/kg/mu]       -4.998748e-03 
+ohflux   [mol/kg/mu]       -9.718358e-05 
+---  uptake --- 
+co2upt        2.745128e-16 
+hupt          3.649065e-19 
+hco3upt       1.023604e-14 
+co3upt        -3.234540e-15 
+ohupt         -3.470175e-16 
+neutral?      -3.419577e-15 
+---   dc/dr bulk (solution)   --- 
+co2flux        1.883350e-03 
+hflux          5.604965e-07 
+hco3flux       5.518838e-02 
+co3flux        -2.089520e-02 
+ohflux         -3.360166e-04 
+---  uptake --- 
+co2upt        2.446288e-13 
+hupt          3.535660e-16 
+hco3upt       4.412427e-12 
+co3upt        -1.352066e-12 
+ohupt         -1.199829e-13 
+neutral?      -1.587959e-12 

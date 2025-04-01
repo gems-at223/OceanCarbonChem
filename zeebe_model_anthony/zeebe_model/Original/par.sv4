@@ -1,0 +1,161 @@
+==================================== 
+=========== par.solvde4 ============ 
+==================================== 
+================================== initc start =============== 
+salinity    [psu] (input)       33.300000 
+temperature [C] (input)         22.000000 
+K_water     [(mumol/kg)**2]      4.484215e-02 
+CO2-atm     [ppmv] (input)      355.000000 
+first acidity constant  [mumol/kg]  1.289869e+00 
+second acidity constant [mumol/kg]  1.019093e-03 
+boric acid constant     [mumol/kg]  2.279380e-03 
+alpha-0 * 100 (CO2)       0.596329 
+alpha-1 * 100 (HCO3-)     88.926477 
+alpha-2 * 100 (CO3--)     10.477195 
+============= bulk concentration =============== 
+pH-bulk (input)            8.063000 
+[H+]-bulk  [mumol/kg]       8.649679e-03 
+[OH-]-bulk [mumol/kg]       5.184256e+00 
+Ca++ bulk (input)    10300.000000 
+CO2-bulk    [mumol/kg]   24.061856 
+DIC-bulk    [mumol/kg]   4035.000000 
+HCO3- bulk  [mumol/kg]   3588.183336 
+CO3-- bulk  [mumol/kg]   422.754808 
+H2O bulk    [mumol/kg]   55560000.000000 
+total boron [mumol/kg]   2055.085714 
+boh3bulk    [mumol/kg]   1626.474134 
+boh4bulk    [mumol/kg]   428.611580 
+dhds = d[H+]/d[CO2]    0.000245 
+alkbulk1 (CA)       [mueq/kg]       4433.692951 
+alkbulk2 (CA+WA)    [mueq/kg]       4438.868557 
+alkbulk3 (CA+WA+BA) [mueq/kg]       4867.480137 
+================================== initc end =============== 
+8.902882e-04   fvisc(tk0) 
+9.547297e-04   fvisc(tk)  
+------------------------- 
+kp1s                   2.862752e-02 
+km1s (before consist)  1.063917e-01 
+kp1s/km1s              2.690767e-01 
+K1                     1.289869e+00 
+km1s (after consist)   2.219414e-02 
+------------------------- 
+kp4(T)                    3.684170e-03 
+km4(T) (consist value)    1.280798e-04 
+------------------------- 
+ --- make kh2co3 consistent --- 
+kh2co3          [1/s]         4.438828 
+------------------------- 
+==================================== 
+========================================= ============= initk start =============== 
+======== rate coefficients ============== 
+k12    [kg/mumol/s]              3.478913e+04 
+k21    [1/s]                     6.957825e+06 
+k13    [kg/mumol/s]              2.577235e-02 
+k31    [1/s]                     3.324294e-02 
+kp4    [kg/mumol/s]              3.684170e-03 
+km4    [1/s]                     1.280798e-04 
+kp5h   [kg/mumol/s]              5.000000e+04 
+km5h   [1/s]                     5.095466e+01 
+kp6    [mumol/kg/s]              1.400000e+03 
+km6    [kg/mumol/s]              3.122063e+04 
+kp7    [kg/mumol/s]              9.546427e+00 
+km7    [1/s]                     1.878065e+02 
+kh2co3 [1/s]                     4.438828e+00 
+======== equi. coefficients ============= 
+Kh2co3 [mumol/kg]               2.000000e+02 
+======== diff. coefficients ============== 
+diff. coeff. CO2   [mu**2/s]   1.653814e+03 
+diff. coeff. CO2   [m**2/s]    1.653814e-09 
+diff. coeff. HCO3- [m**2/s]    1.017982e-09 
+diff. coeff. CO3-- [m**2/s]    8.238751e-10 
+diff. coeff. H+    [m**2/s]    8.031704e-09 
+diff. coeff. OH-   [m**2/s]    4.546410e-09 
+dicosw(T) (correction)         9.345442e-01 
+diff. coeff. Ca++  [m**2/s]    6.841183e-10 
+diff. coeff. ATA   [m**2/s]    6.841183e-10 
+diff. coeff. O2    [m**2/s]    2.086251e-09 
+diff. coeff. BOH3  [m**2/s]    1.024663e-09 
+diff. coeff. BOH4  [m**2/s]    8.954264e-10 
+================================== initk end =============== 
+================================== inita start =============== 
+TKELVIN (input)          273.150000 
+temperature [K] (input)  295.150000 
+cell radius [mu] (input) 250.000000 
+bulk radius [mu] (input) 2500.000000 
+TCO2  uptake   [mol/s] (input) -5.555556e-13 
+CO2   uptake   [mol/s] (input) -5.555556e-13 
+HCO3- uptake   [mol/s] (input) 0.000000e+00 
+CO3-- uptake   [mol/s] (input) 8.333333e-13 
+CA++  uptake [mol/s] (input) 8.333333e-13 
+OH-   uptake [mol/s] (input) 0.000000e+00 
+H+    uptake [mol/s] (input) 0.000000e+00 
+CA++ bulk [mol/kg] (input)         1.030000e+04 
+neutral?     [mol/s/cell] (input) 0.000000e+00 
+M grid points (input)     1000 
+co2flux  [mol/kg/mu]      -4.277114e-01 
+o2flux   [mol/kg/mu]      3.390557e-01 
+boh3flux [mol/kg/mu]      0.000000e+00 
+boh4flux [mol/kg/mu]      0.000000e+00 
+hflux    [mol/kg/mu]      0.000000e+00 
+hco3flux [mol/kg/mu]      0.000000e+00 
+co3flux  [mol/kg/mu]      1.287857e+00 
+ohflux   [mol/kg/mu]      0.000000e+00 
+caflux    [mol/kg/mu]      1.550950e+00 
+surface area [mu**2]    7.853982e+05 
+REDF: Redf. foram resp. 1.000000e+00 
+================================== inita end =============== 
+--- solvde4.c  --- 
+--- diffusion and reaction  --- 
+EQCO2   1 
+EQHCO3  2 
+EQCO3   3 
+EQHP    4 
+EQOH    5 
+EQBOH3  6 
+EQBOH4  7 
+EQO2    8 
+EQCA    9 
+(N2) number of equations of 2. order 9 
+(NE) number of equations of 1. order 18 
+(NLB) number of left b.c.            9 
+(NRB) number of right b.c.           9 
+dimensions of y-array  18  1000 
+dimensions of s-array  18  37 
+dimensions of c-array  18  10  1001 
+h [mu] grid spacing       2.252252e+00 
+------------------------- 
+2.500000e+02   r[1]                 
+2.500000e+03   r[M]                 
+------------------------- 
+---   dc/dr at the surface (solution)   --- 
+co2flux  [mol/kg/mu]       -4.196759e-01 
+hflux    [mol/kg/mu]       -2.462347e-05 
+hco3flux [mol/kg/mu]       4.713536e-02 
+co3flux  [mol/kg/mu]       1.219040e+00 
+ohflux   [mol/kg/mu]       8.916617e-04 
+d(co2flux)             [percent]    -1.878731e+00 
+d(hflux)/d(co2flux)    [percent]    5.757029e-03 
+d(hco3flux)/d(co2flux) [percent]    -1.102036e+01 
+d(co3flux)/d(co2flux)  [percent]    1.608945e+01 
+d(ohflux)/d(co2flux)   [percent]    -2.084727e-01 
+d(co3flux) [percent]        -5.343485e+00 
+---  uptake --- 
+co2upt        -5.451182e-13 
+hupt          -1.553270e-16 
+hco3upt       3.768571e-14 
+co3upt        7.888043e-13 
+ohupt         3.183894e-15 
+neutral?      -1.618634e-12 
+---   dc/dr bulk (solution)   --- 
+co2flux        9.724716e-04 
+hflux          2.511776e-07 
+hco3flux       4.225193e-02 
+co3flux        -7.298757e-03 
+ohflux         -1.505755e-04 
+---  uptake --- 
+co2upt        1.263146e-13 
+hupt          1.584450e-16 
+hco3upt       3.378131e-12 
+co3upt        -4.722807e-13 
+ohupt         -5.376664e-14 
+neutral?      -2.379644e-12 
